@@ -1,16 +1,16 @@
 var img;  // Declare variable 'img'.
 
-var WIDTH = 650,
-    HEIGHT = 400,
-    K = 10,
-    NEIGHB = 3;
+var WIDTH = 700,
+    HEIGHT = 450,
+    K = 7,
+    NEIGHB = 5;
 
 
 function setup() {
     createCanvas(WIDTH, HEIGHT);
     fill(10, 10, 10);
     //rect(0, 0, WIDTH, HEIGHT);
-    loadImage("j.jpg", drawImg);  // Load the image
+    loadImage("putin.jpg", drawImg);  // Load the image
 }
 
 function getNeighbors(pixels, c, x, y, r) {
@@ -35,7 +35,7 @@ function drawImg(loadedImg) {
     for (i = 0; i < WIDTH / K; i++) {
         pixels[i] = [];
         for (j = 0; j < HEIGHT / K; j++) {
-            var r = floor((255 - img.get(i, j)[0]) / 10),
+            var r = floor((255 - brightness(color(img.get(i, j)))) / 10),
                 g = floor((255 - img.get(i, j)[1]) / 10),
                 b = floor((255 - img.get(i, j)[2]) / 10);
             pixels[i][j] = [r, g, b];
@@ -43,41 +43,41 @@ function drawImg(loadedImg) {
     }
 
     noFill();
-    for (var color = 0; color < 3; color++) {
-        stroke(255 * (color == 0), 255 * (color == 1), 255 * (color == 2), 10);
-        beginShape();
+    colorMode(HSB, 255);
 
-        var x = 0;//WIDTH / / 2,
-            y = 0;//HEIGHT / 2;
+    stroke(0, 0, 255, 15);
+    beginShape();
 
-        var counter = 0;
+    var x = 0;//WIDTH / / 2,
+        y = 0;//HEIGHT / 2;
 
-        while (true) {
-            if (counter++ % 100 == 0)
-                console.log(counter);
+    var counter = 0;
 
-            curveVertex((x + random() - 0.5) * K, (y + random() - 0.5) * K);
+    while (true) {
+        if (counter++ % 100 == 0)
+            console.log(counter);
 
-            var i = 0;
-            var neighbors = []
-            while (neighbors.length == 0 && i * NEIGHB < WIDTH / K) {
-                i++;
-                neighbors = getNeighbors(pixels, color, x, y, i * NEIGHB);
-            }
+        curveVertex((x + random() - 0.5) * K, (y + random() - 0.5) * K);
 
-            if (neighbors.length == 0)
-                break;
-
-            var j = floor(random(neighbors.length));
-            x = neighbors[j].x;
-            y = neighbors[j].y;
-            pixels[x][y][color]--;
+        var i = 0;
+        var neighbors = []
+        while (neighbors.length == 0 && i * NEIGHB < WIDTH / K) {
+            i++;
+            neighbors = getNeighbors(pixels, 0, x, y, i * NEIGHB);
         }
 
-        endShape();
+        if (neighbors.length == 0)
+            break;
 
-        console.log('done');
+        var j = floor(random(neighbors.length));
+        x = neighbors[j].x;
+        y = neighbors[j].y;
+        pixels[x][y][0]--;
     }
+
+    endShape();
+
+    console.log('done');
 }
 
 function draw() {
