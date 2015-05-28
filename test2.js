@@ -1,7 +1,7 @@
 var img;  // Declare variable 'img'.
 
-var WIDTH = 650,
-    HEIGHT = 400;
+var WIDTH = 800,
+    HEIGHT = 600;
 
 var START_RADIUS = 1,
     END_RADIUS = 400,
@@ -13,7 +13,7 @@ function setup() {
     createCanvas(WIDTH, HEIGHT);
     fill('black');
     rect(0, 0, WIDTH, HEIGHT);
-    loadImage("j.jpg", drawImg);  // Load the image
+    loadImage("aw.jpg", drawImg);  // Load the image
 }
 
 function drawImg(loadedImg) {
