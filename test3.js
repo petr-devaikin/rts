@@ -1,8 +1,8 @@
 var img;  // Declare variable 'img'.
 
-var WIDTH = 700,
-    HEIGHT = 450,
-    K = 7,
+var WIDTH = 1000,
+    HEIGHT = 560,
+    K = 10,
     NEIGHB = 5;
 
 
@@ -10,7 +10,7 @@ function setup() {
     createCanvas(WIDTH, HEIGHT);
     fill(10, 10, 10);
     //rect(0, 0, WIDTH, HEIGHT);
-    loadImage("putin.jpg", drawImg);  // Load the image
+    loadImage("aw2.jpg", drawImg);  // Load the image
 }
 
 function getNeighbors(pixels, c, x, y, r) {
@@ -45,7 +45,7 @@ function drawImg(loadedImg) {
     noFill();
     colorMode(HSB, 255);
 
-    stroke(0, 0, 255, 15);
+    stroke(0, 0, 0, 20);
     beginShape();
 
     var x = 0;//WIDTH / / 2,

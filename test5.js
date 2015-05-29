@@ -2,16 +2,39 @@ var img;  // Declare variable 'img'.
 
 var WIDTH = 650,
     HEIGHT = 300,
-    POINT_COUNT = 20,
     INIT_MAX_SPEED = 3,
-    LINES_COUNT = 2,
-    ITERATION_COUNT = 400;
+
+    POINT_COUNT,
+    LINES_COUNT,
+    ITERATION_COUNT;
+
+
+function grabParams() {
+    LINES_COUNT = document.getElementById('lineCount').value;
+    POINT_COUNT = document.getElementById('pointCount').value;
+    ITERATION_COUNT = document.getElementById('iterationCount').value;
+}
 
 
 function setup() {
     createCanvas(WIDTH, HEIGHT);
+    
+    var inputs = document.querySelectorAll('#controls input');
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener("input", clearAndDraw, false);
+    }
+    document.querySelector('#controls button').addEventListener("click", clearAndDraw, false);
+
+    clearAndDraw();
+}
+
+function clearAndDraw() {
+    console.log('clear and draw');
+
     fill(10, 10, 10);
     rect(0, 0, WIDTH, HEIGHT);
+
+    grabParams();
     drawBg();
 }
 
